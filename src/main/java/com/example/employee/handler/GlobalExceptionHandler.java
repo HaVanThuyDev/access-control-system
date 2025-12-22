@@ -28,7 +28,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> handleResourceNotFoundException(ResourceNotFoundException e, WebRequest request) {
         log.error(e.toString());
         ErrorDetail errorDetail= new ErrorDetail( new Date() ,e.getMessage(),"",request.getDescription(false));
-        return new ResponseEntity<>(errorDetail, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(errorDetail, HttpStatus.NOT_FOUND);//Server không tìm thấy tài nguyên (resource) tương ứng với URL mà client yêu cầu.
     }
     @ExceptionHandler(EntityValidationException.class)
     public ResponseEntity<?> EntityValidationException(EntityValidationException e, WebRequest request) {
@@ -41,26 +41,26 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> PartialUpdateException(PartialUpdateException e, WebRequest request) {
         log.error(e.toString());
         ErrorDetail errorDetail= new ErrorDetail( new Date() ,messageTemplate.message("error validation"),"",request.getDescription(false));
-        return new ResponseEntity<>(errorDetail, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(errorDetail, HttpStatus.BAD_REQUEST);//Server không hiểu hoặc không thể xử lý request do dữ liệu client gửi lên không hợp lệ.
     }
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<?> ResourceNotFoundException(ResourceNotFoundException e, WebRequest request) {
         log.error(e.toString());
         ErrorDetail errorDetail= new ErrorDetail( new Date() ,messageTemplate.message("error validate"),"",request.getDescription(false));
-        return new ResponseEntity<>(errorDetail, HttpStatus.NOT_ACCEPTABLE);
+        return new ResponseEntity<>(errorDetail, HttpStatus.NOT_ACCEPTABLE);//Server nhận request, nhưng không thể trả response theo định dạng mà client yêu cầu trong header
     }
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> globalExceptionHandler(Exception e, WebRequest request) {
         log.error(e.toString());
         ErrorDetail errorDetail= new ErrorDetail( new Date() ,messageTemplate.message("error.system"),"",request.getDescription(false));
-        return new ResponseEntity<>(errorDetail, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(errorDetail, HttpStatus.INTERNAL_SERVER_ERROR);// Server đã nhận request đúng, nhưng bị lỗi trong quá trình xử lý nên không trả về kết quả được.
 
     }
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<?> HttpMessageNotReadableException(HttpMessageNotReadableException e, WebRequest request) {
         log.error(e.toString());
         ErrorDetail errorDetail = new ErrorDetail( new Date() ,messageTemplate.message("error.validation"),"",request.getDescription(false));
-        return new ResponseEntity<>(errorDetail, HttpStatus.METHOD_NOT_ALLOWED);
+        return new ResponseEntity<>(errorDetail, HttpStatus.METHOD_NOT_ALLOWED);// Server có endpoint đó, nhưng không cho phép HTTP method mà client đang dùng.
     }
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public ResponseEntity <?> httpRequestMethodNotSupportedException (HttpRequestMethodNotSupportedException e, WebRequest request) {
