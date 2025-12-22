@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -43,12 +44,12 @@ public class GlobalExceptionHandler {
         ErrorDetail errorDetail= new ErrorDetail( new Date() ,messageTemplate.message("error validation"),"",request.getDescription(false));
         return new ResponseEntity<>(errorDetail, HttpStatus.BAD_REQUEST);//Server không hiểu hoặc không thể xử lý request do dữ liệu client gửi lên không hợp lệ.
     }
-    @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<?> ResourceNotFoundException(ResourceNotFoundException e, WebRequest request) {
-        log.error(e.toString());
-        ErrorDetail errorDetail= new ErrorDetail( new Date() ,messageTemplate.message("error validate"),"",request.getDescription(false));
-        return new ResponseEntity<>(errorDetail, HttpStatus.NOT_ACCEPTABLE);//Server nhận request, nhưng không thể trả response theo định dạng mà client yêu cầu trong header
-    }
+//    @ExceptionHandler(ResourceNotFoundException.class)
+//    public ResponseEntity<?> ResourceNotFoundException(ResourceNotFoundException e, WebRequest request) {
+//        log.error(e.toString());
+//        ErrorDetail errorDetail= new ErrorDetail( new Date() ,messageTemplate.message("error validate"),"",request.getDescription(false));
+//        return new ResponseEntity<>(errorDetail, HttpStatus.NOT_ACCEPTABLE);//Server nhận request, nhưng không thể trả response theo định dạng mà client yêu cầu trong header
+//    }
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> globalExceptionHandler(Exception e, WebRequest request) {
         log.error(e.toString());
@@ -68,4 +69,11 @@ public class GlobalExceptionHandler {
         ErrorDetail errorDetail = new ErrorDetail( new Date() ,messageTemplate.message("error.system"),"",request.getDescription(false));
         return new ResponseEntity<>(errorDetail, HttpStatus.METHOD_NOT_ALLOWED);
     }
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<?> handleBadCredentialsException(BadCredentialsException e, WebRequest request) {
+        log.error(e.toString());
+        ErrorDetail errorDetail = new ErrorDetail( new Date(), e.getMessage(), "", request.getDescription(false));
+        return new ResponseEntity<>(errorDetail, HttpStatus.UNAUTHORIZED);
+    }
+
 }

@@ -11,9 +11,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor //Tạo constructor đầy đủ tham số:
 public class UserRequestDTO {
     private  String name ;
-    private  String email ;
+    private  String gmail ;
     private String phone ;
     private  String pass;
+    public UserRequestDTO(String gmail,  String pass) {
+        this.gmail = gmail;
+        this.pass = pass;
 
-
+    }
 }

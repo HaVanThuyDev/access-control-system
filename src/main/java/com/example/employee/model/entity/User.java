@@ -2,10 +2,7 @@ package com.example.employee.model.entity;
 
 
 import com.example.employee.model.enums.Role;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,9 +21,10 @@ public class User {
     private  String gmail;
     @Column(name=" PHONE" ,nullable = false)
     private  int phone;
-    @Column ( name = " PASS")
+    @Column ( name = " PASSWORD")
     private  String password;
-    @Column  (name =" VAITRO")
+    @Column  (name =" ROLE")
+    @Enumerated(EnumType.STRING)
     private Role role;
 
 
