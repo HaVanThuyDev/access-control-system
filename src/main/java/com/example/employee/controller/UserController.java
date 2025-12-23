@@ -28,4 +28,12 @@ public class UserController {
 
         );
     }
+    @PostMapping
+    public SuccessResponse<UserReponseDTO> register(@RequestBody UserRequestDTO request)   {
+        UserReponseDTO user = userService.register(request);
+        return new SuccessResponse<>(
+                "Register succes",
+                user
+        );
+    }
 }

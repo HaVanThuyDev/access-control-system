@@ -31,7 +31,6 @@ public class UserServiceImpl implements UserService {
                 user.getPassword(),
                 user.getRole()
         );
-
         String token = jwtService.generateToken(userDTO);
         return new UserReponseDTO(user.getName(),user.getRole(),token);
     }
@@ -42,6 +41,9 @@ public class UserServiceImpl implements UserService {
        }
        User User = new User();
        User.setGmail(request.getGmail());
+       User.setName(request.getName());
+       User.setPhone(request.getPhone());
+       User.setRole(request.getRole());
        User.setPassword(request.getPass());
        userRepository.save(User );
        return new UserReponseDTO(User.getGmail(),User.getRole(),null);

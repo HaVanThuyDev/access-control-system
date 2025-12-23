@@ -1,5 +1,6 @@
 package com.example.employee.model.dto.request;
 
+import com.example.employee.model.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,11 +13,14 @@ import lombok.NoArgsConstructor;
 public class UserRequestDTO {
     private  String name ;
     private  String gmail ;
-    private String phone ;
+    private int phone ;
     private  String pass;
-    public UserRequestDTO(String gmail,  String pass) {
+    private Role role;
+    public UserRequestDTO(String gmail,int phone,  String pass,Role role) {
         this.gmail = gmail;
+        this.phone = phone;
         this.pass = pass;
+        this.role = role;
 
     }
 }

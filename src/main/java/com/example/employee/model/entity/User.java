@@ -11,7 +11,7 @@ import lombok.Setter;
 @Entity
 @Table (name = " USERS")
 
-public class User {
+public class User extends  BaseStatusEntity {
     @Id
     @Column (name = "ID", nullable = false)
     private  Long id;
