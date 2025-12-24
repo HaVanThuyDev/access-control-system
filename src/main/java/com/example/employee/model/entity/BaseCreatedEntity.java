@@ -9,23 +9,23 @@ import lombok.*;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import java.util.Date;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @ToString
 @MappedSuperclass
 @NoArgsConstructor
-@AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class BaseCreatedEntity {
-    @JsonProperty ( access = JsonProperty.Access.READ_ONLY)
-    @CreatedDate
-    @Column(name =" CREATE_AT" ,nullable = false)
-    private Date createdDate;
-    @JsonProperty (access = JsonProperty.Access.READ_ONLY)
-    @CreatedBy
-    @Column(name ="CREARE_BY" , nullable = false)
-    private String createdBy;
+public abstract class BaseCreatedEntity {
 
+    @CreatedDate
+    @Column(name = "CREATED_AT", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @CreatedBy
+    @Column(name = "CREATED_BY", updatable = false)
+    private String createdBy;
 }
+

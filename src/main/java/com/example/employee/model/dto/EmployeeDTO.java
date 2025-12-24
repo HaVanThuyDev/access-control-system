@@ -29,6 +29,5 @@ public class EmployeeDTO extends BaseModifiedEntity  {
         this.level =employee.getLevel();
         this.experience = employee.getExpertise();
 
-
     }
 }

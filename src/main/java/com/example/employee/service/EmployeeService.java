@@ -15,7 +15,8 @@ public interface EmployeeService {
     List<EmployeeReponseDTO> findAll();
     EmployeeDTO update(Long id, EmployeeRequestDTO request);
     List<EmployeeDTO> deleteById(Long id);
-    List<EmployeeDTO> search(String name, String address, String phone);
+    List<EmployeeReponseDTO> search(String name, String address, String phone);
+    EmployeeReponseDTO getDetails (Long id);
 
 
 }

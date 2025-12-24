@@ -15,8 +15,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BaseStatusEntity {
-    @Column(name ="STATUS")
-    private int status;
-    private Status status1;
+    @Column(name ="ACCOUNT_STATUS")
+    private Status status;
 
 }

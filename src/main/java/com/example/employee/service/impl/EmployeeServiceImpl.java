@@ -6,12 +6,20 @@ import com.example.employee.model.dto.request.EmployeeRequestDTO;
 import com.example.employee.model.entity.Employee;
 import com.example.employee.repository.EmployeeRepository;
 import com.example.employee.service.EmployeeService;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
+
+
 public class EmployeeServiceImpl implements EmployeeService {
-    private EmployeeService employeeService;
     private EmployeeRepository employeeRepository;
+
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
 
     @Override
     public EmployeeDTO findById(Long id) {
@@ -21,7 +29,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<EmployeeReponseDTO> findAll() {
-        return employeeService.findAll();
+      long total = employeeRepository.count();
+        return employeeRepository.findAll().stream().map(employee -> {
+            EmployeeReponseDTO list = new EmployeeReponseDTO(employee);
+            list.setTotal(total);
+            return list;
+        }).toList();
     }
 
     @Override
@@ -36,7 +49,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             if (request.getPhone() != null && request.getPhone().isBlank()) employee.setPhone(request.getPhone());
             if (request.getGender() != null && request.getGender().isBlank()) employee.setGender(request.getGender());
             if (request.getLevel() != null && request.getLevel().isBlank()) employee.setLevel(request.getLevel());
-            if (request.getExperience() != null && request.getExperience().isBlank()) employee.setExpertise(request.getExperience());
+            if (request.getExpertise() != null && request.getExpertise().isBlank()) employee.setExpertise(request.getExpertise());
             Employee updatedEmployee = employeeRepository.save(employee);
             return new EmployeeDTO(updatedEmployee);
         } catch (Exception e) {
@@ -52,8 +65,16 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<EmployeeDTO> search(String name, String address, String phone) {
-        return List.of();
+    public List<EmployeeReponseDTO> search(String name, String address, String phone) {
+       List<Employee> employees =employeeRepository.searchBy(name, address, phone);
+       return employees.stream().map(EmployeeReponseDTO :: new).toList();
+    }
+
+    @Override
+    public EmployeeReponseDTO getDetails(Long id) {
+        Employee employee=employeeRepository.findById(id).orElseThrow(() -> new RuntimeException("Employee not found with id: " + id));
+        EmployeeReponseDTO dto = new EmployeeReponseDTO(employee);
+        return dto;
     }
 
     @Override
@@ -66,7 +87,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             employee.setPhone(request.getPhone());
             employee.setGender(request.getGender());
             employee.setLevel(request.getLevel());
-            employee.setExpertise(request.getExperience());
+            employee.setExpertise(request.getExpertise());
             Employee savedEmployee = employeeRepository.save(employee);
             return new EmployeeDTO(savedEmployee);
         }catch (Exception e){

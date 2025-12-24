@@ -9,7 +9,8 @@ import lombok.*;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import java.util.Date;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -19,12 +20,10 @@ import java.util.Date;
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 public class BaseModifiedEntity extends BaseCreatedEntity{
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @LastModifiedDate
     @Column(name = "MODIFIED_AT")
-    private Date modifiedAt;
+    private LocalDateTime modifiedAt;
 
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @LastModifiedBy
     @Column(name = "MODIFIED_BY")
     private String modifiedBy;

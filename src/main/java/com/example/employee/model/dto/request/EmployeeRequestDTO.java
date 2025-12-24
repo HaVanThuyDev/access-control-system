@@ -9,7 +9,6 @@ import java.util.Date;
 @Data
 @Builder
 @NoArgsConstructor
-@AllArgsConstructor
 public class EmployeeRequestDTO {
     private String name;
     private Date date;
@@ -17,15 +16,15 @@ public class EmployeeRequestDTO {
     private String phone;
     private String gender;
     private String level;
-    private String experience;
-    public EmployeeRequestDTO(String name, Date date, String address, String phone, String gender, String level, String experience) {
+    private String expertise;
+    public EmployeeRequestDTO(String name, Date date, String address, String phone, String gender, String level, String expertise) {
         this.name = name;
         this.date = date;
         this.address = address;
         this.phone = phone;
         this.gender = gender;
         this.level = level;
-        this.experience = experience;
+        this.expertise = expertise;
 
     }
 }
