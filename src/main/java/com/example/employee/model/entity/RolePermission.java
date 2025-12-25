@@ -10,19 +10,21 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@Table (name ="role_permission_scope")
 public class RolePermission {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
     @Enumerated(EnumType.STRING)
     @Column (name ="ROLE_ID")
     private Role role;
-    @ManyToOne
-    private Permission permission;
     @Enumerated(EnumType.STRING)
     @Column(name =" SCOPE")
     private Scope scope;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name ="permission_id")
+    private Permission permission;
 
 
 

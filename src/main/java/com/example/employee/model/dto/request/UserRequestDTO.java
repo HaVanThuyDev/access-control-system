@@ -13,6 +13,6 @@ import lombok.NoArgsConstructor;
 public class UserRequestDTO {
     private  String name ;
     private  String gmail ;
-    private Integer phone ;
+    private String phone ;
     private  String password ;
 }

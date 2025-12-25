@@ -1,5 +1,6 @@
 package com.example.employee.security;
 
+import com.example.employee.model.enums.Role;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,8 +21,8 @@ public class JwtProvider {
         this.key = Keys.hmacShaKeyFor(secret.getBytes());
         this.expirationMs = expirationMs;
     }
-    public String generateToken(Long userId, String email, List<String> roles,List<String> permissions) {
-        return Jwts.builder().setSubject(email).claim("userId",userId).claim("roles",roles).claim("permissions",permissions).setIssuedAt(new Date())
+    public String generateToken(Long userId, String email, Role role, List<String> permissions) {
+        return Jwts.builder().setSubject(email).claim("userId",userId).claim("roles",role).claim("permissions",permissions).setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + expirationMs)).signWith(key,SignatureAlgorithm.HS256).compact();
 
     }

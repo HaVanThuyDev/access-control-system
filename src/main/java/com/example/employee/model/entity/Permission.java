@@ -8,12 +8,11 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-@Table(name ="DIM _PERMISSON")
+@Table(name ="dim_premission")
 
 public class Permission {
     @Id
-    @GeneratedValue
-    @Column(name ="ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(name="RESOURCE")
     private String resource;

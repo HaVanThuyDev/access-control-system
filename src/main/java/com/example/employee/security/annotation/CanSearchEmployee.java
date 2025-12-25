@@ -10,5 +10,5 @@
 //@Target(ElementType.METHOD)
 //@Retention(RetentionPolicy.RUNTIME)
 //@PreAuthorize("hasAuthority('EMPLOYEE.SEARCH:ALL')")
-//public @interface CanGetAllEmployee {
+//public @interface CanSearchEmployee {
 //}

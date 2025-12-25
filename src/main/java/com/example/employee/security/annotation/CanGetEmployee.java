@@ -9,6 +9,6 @@
 //
 //@Target(ElementType.METHOD)
 //@Retention(RetentionPolicy.RUNTIME)
-//@PreAuthorize("hasAuthority('EMPLOYEE.SEARCH:ALL')")
-//public @interface CanGetAllEmployee {
+//@PreAuthorize("hasPermission(#id, 'Employee', 'READ')")
+//public @interface CanGetEmployee {
 //}

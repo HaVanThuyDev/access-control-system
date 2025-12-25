@@ -1,8 +1,9 @@
 package com.example.employee.controller;
 
 import com.example.employee.model.SuccessResponse;
+import com.example.employee.model.dto.EmployeeDTO;
 import com.example.employee.model.dto.reponse.EmployeeReponseDTO;
-import com.example.employee.model.dto.reponse.ResponseBase;
+import com.example.employee.model.dto.reponse.ResponseDTO;
 import com.example.employee.model.dto.request.EmployeeRequestDTO;
 import com.example.employee.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,6 @@ public class EmployeeController {
                 employeeService.findAll()
         );
     }
-
     @PostMapping("/add")
     public ResponseEntity <?> create (@RequestBody EmployeeRequestDTO request) {
         try {
@@ -62,9 +62,21 @@ public class EmployeeController {
             return ResponseEntity.internalServerError().body("Employee delete failed.!");
         }
     }
-    @PostMapping("/search/{}")
-    public ResponseEntity <List<EmployeeReponseDTO>> search (@PathVariable Long id, @RequestBody EmployeeRequestDTO request) {
-       List<EmployeeReponseDTO> employees = employeeService.search(request.getName(),request.getAddress(),request.getPhone());
-       return ResponseEntity.ok(employees);
+    @GetMapping("/search/")
+    public List<EmployeeReponseDTO> search(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String address,
+            @RequestParam(required = false) String phone
+    ) {
+        return employeeService.search(name, address, phone);
+    }
+
+    @PostMapping("/details/{id}")
+    public ResponseEntity<ResponseDTO<EmployeeDTO>> getDetails (@PathVariable Long id) {
+        EmployeeReponseDTO dto = employeeService.getDetails(id);
+        return ResponseEntity.ok(
+                ResponseDTO.build(200, "Success", 1L, dto)
+        );
+
     }
 }

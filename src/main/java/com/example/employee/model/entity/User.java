@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-@Table (name = " USERS")
+@Table (name = "USERS")
 
 public class User extends  BaseStatusEntity {
     @Id
@@ -18,10 +18,10 @@ public class User extends  BaseStatusEntity {
     private  Long id;
     @Column( name ="NAME", nullable = false )
     private  String name;
-    @Column ( name= "GMAIL ", nullable = false)
+    @Column ( name= "GMAIL", nullable = false)
     private  String gmail;
     @Column(name="PHONE" ,nullable = false)
-    private  int phone;
+    private  String phone;
     @Column ( name = "PASSWORD")
     private  String password;
     @Column  (name ="ROLE")

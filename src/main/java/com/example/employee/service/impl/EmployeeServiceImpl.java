@@ -7,10 +7,13 @@ import com.example.employee.model.entity.Employee;
 import com.example.employee.repository.EmployeeRepository;
 import com.example.employee.security.annotation.*;
 import com.example.employee.service.EmployeeService;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.employee.model.enums.Action.*;
+import static com.example.employee.model.enums.ResourceType.EMPLOYEE;
+
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeRepository employeeRepository;
@@ -20,14 +23,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    @CanReadEmployee
+    @PermissionCheck(resource = EMPLOYEE, action = SEARCH)
     public EmployeeDTO findById(Long id) {
         Employee employee = employeeRepository.findById(id).orElseThrow(() -> new RuntimeException("Employee not found with id: " + id));
         return new EmployeeDTO(employee);
     }
 
     @Override
-    @CanGetAllEmployee
+    @PermissionCheck(resource = EMPLOYEE, action = SEARCH)
     public List<EmployeeReponseDTO> findAll() {
       long total = employeeRepository.count();
         return employeeRepository.findAll().stream().map(employee -> {
@@ -38,7 +41,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    @CanUpdateEmployee
+    @PermissionCheck(resource = EMPLOYEE, action = UPDATE)
     public EmployeeDTO update(Long id, EmployeeRequestDTO request) {
             Employee employee = employeeRepository.findById(id).orElseThrow(() -> new RuntimeException("Employee not found with id: " + id));
             if (request.getName() != null && request.getName().isBlank()) employee.setName(request.getName());
@@ -53,21 +56,21 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    @CanDeleteEmployee
+    @PermissionCheck(resource = EMPLOYEE, action = DELETE)
     public List<EmployeeDTO> deleteById(Long id) {
         Employee employee = employeeRepository.findById(id).orElseThrow(() -> new RuntimeException("Employee not found with id: " + id));
         employeeRepository.delete(employee);
         return new ArrayList<>();
     }
     @Override
-    @PreAuthorize("hasAuthority('EMPLOYEE.READ:ALL')")
+    @PermissionCheck(resource = EMPLOYEE, action = SEARCH)
     public List<EmployeeReponseDTO> search(String name, String address, String phone) {
         List<Employee> employees = employeeRepository.searchBy(name, address, phone);
         return employees.stream().map(EmployeeReponseDTO::new).toList();
     }
 
     @Override
-    @CanReadEmployee
+    @PermissionCheck(resource = EMPLOYEE, action = READ)
     public EmployeeReponseDTO getDetails(Long id) {
         Employee employee=employeeRepository.findById(id).orElseThrow(() -> new RuntimeException("Employee not found with id: " + id));
         EmployeeReponseDTO dto = new EmployeeReponseDTO(employee);
@@ -75,7 +78,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    @CanCreateEmployee
+    @PermissionCheck(resource = EMPLOYEE, action = CREATE)
     public EmployeeDTO create (EmployeeRequestDTO request) {
             Employee employee = new Employee();
         if (request.getName() != null && !request.getName().isBlank()) employee.setName(request.getName());
