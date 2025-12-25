@@ -1,10 +1,10 @@
 package com.example.employee.service;
 
-import com.example.employee.model.dto.UserDTO;
 import com.example.employee.model.dto.reponse.UserReponseDTO;
 import com.example.employee.model.dto.request.UserRequestDTO;
+import com.example.employee.model.entity.User;
 
 public interface UserService {
     UserReponseDTO login(String email, String password);
-    UserReponseDTO register(UserRequestDTO requestDTO);
+    User register(UserRequestDTO request);
 }

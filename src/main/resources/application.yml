@@ -14,6 +14,6 @@ spring:
         format_sql: true
 
 jwt:
-  secret: mysupersecretkey12345678901234567890
-  expiration-seconds: 86400
+  secret: very-secret-key-very-secret-key-very-secret-key-123456
+  expiration: 86400000
   issuer: employee-app

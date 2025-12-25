@@ -13,14 +13,6 @@ import lombok.NoArgsConstructor;
 public class UserRequestDTO {
     private  String name ;
     private  String gmail ;
-    private int phone ;
-    private  String pass;
-    private Role role;
-    public UserRequestDTO(String gmail,int phone,  String pass,Role role) {
-        this.gmail = gmail;
-        this.phone = phone;
-        this.pass = pass;
-        this.role = role;
-
-    }
+    private Integer phone ;
+    private  String password ;
 }

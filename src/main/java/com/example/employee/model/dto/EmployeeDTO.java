@@ -14,7 +14,7 @@ import java.util.Date;
 public class EmployeeDTO extends BaseModifiedEntity  {
     private long mnv;
     private String name;
-    private Date date;
+    private Date birthDate;
     private String address;
     private String phone;
     private String gender;
@@ -22,7 +22,7 @@ public class EmployeeDTO extends BaseModifiedEntity  {
     private String experience;
     public  EmployeeDTO(Employee employee){
         this.name =employee.getName();
-        this.date =employee.getDate();
+        this.birthDate =employee.getBirthDate();
         this.address =employee.getAddress();
         this.phone =employee.getPhone();
         this.gender =employee.getGender();

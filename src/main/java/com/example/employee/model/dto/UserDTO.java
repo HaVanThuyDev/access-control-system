@@ -13,7 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class UserDTO extends ResponseBase {
     private Long id;
-    private  String username;
+    private  String name;
     private String gmail;
     private  String password;
     private Role role;

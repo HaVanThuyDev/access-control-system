@@ -16,18 +16,18 @@ import java.util.Date;
 public class Employee extends BaseModifiedEntity{
     @Id
     @Column(name="MNV", nullable=false)
-    private Long msv;
+    private Long mnv;
     @Column(name ="NAME")
     private String name;
-    @Column (name ="DATE")
-    private Date date;
-    @Column (name =" ADDRESS")
+    @Column (name ="BIRTH_DATE")
+    private Date birthDate;
+    @Column (name ="ADDRESS")
     private String address;
     @Column ( name = "PHONE")
     private String phone;
-    @Column (name =" GENDER")
+    @Column (name ="GENDER")
     private String gender;
-    @Column(name = " LEVEL")
+    @Column(name = "LEVEL")
     private String level;
     @Column(name ="EXPERTISE")
     private String expertise;

@@ -19,16 +19,4 @@ public class UserReponseDTO  {
         this.token =token;
 
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public String getToken() {
-        return token;
-    }
 }

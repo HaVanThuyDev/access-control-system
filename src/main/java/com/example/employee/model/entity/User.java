@@ -13,17 +13,18 @@ import lombok.Setter;
 
 public class User extends  BaseStatusEntity {
     @Id
-    @Column (name = "ID", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column (name = "ID")
     private  Long id;
     @Column( name ="NAME", nullable = false )
     private  String name;
     @Column ( name= "GMAIL ", nullable = false)
     private  String gmail;
-    @Column(name=" PHONE" ,nullable = false)
+    @Column(name="PHONE" ,nullable = false)
     private  int phone;
-    @Column ( name = " PASSWORD")
+    @Column ( name = "PASSWORD")
     private  String password;
-    @Column  (name =" ROLE")
+    @Column  (name ="ROLE")
     @Enumerated(EnumType.STRING)
     private Role role;
 

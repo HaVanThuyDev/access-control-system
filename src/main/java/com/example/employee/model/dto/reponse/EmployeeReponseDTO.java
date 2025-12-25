@@ -16,20 +16,20 @@ public class EmployeeReponseDTO extends ResponseBase {
     private String gender;
     private String level;
     private String expertise;
-    public EmployeeReponseDTO(Long mnv, String name, String date, String address, String phone, String gender, String level, String expertise) {
-        this.mnv = mnv;
-        this.name = name;
-        this.date = new Date(Long.parseLong(date));
-        this.address = address;
-        this.phone = phone;
-        this.gender = gender;
-        this.level = level;
-        this.expertise = expertise;
-    }
+//    public EmployeeReponseDTO(Long mnv, String name, String date, String address, String phone, String gender, String level, String expertise) {
+//        this.mnv = mnv;
+//        this.name = name;
+//        this.date = new Date(Long.parseLong(date));
+//        this.address = address;
+//        this.phone = phone;
+//        this.gender = gender;
+//        this.level = level;
+//        this.expertise = expertise;
+//    }
     public EmployeeReponseDTO(Employee employee) {
-        this.mnv = employee.getMsv();
+        this.mnv = employee.getMnv();
         this.name = employee.getName();
-        this.date = employee.getDate();
+        this.date = employee.getBirthDate();
         this.address = employee.getAddress();
         this.phone = employee.getPhone();
         this.gender = employee.getGender();

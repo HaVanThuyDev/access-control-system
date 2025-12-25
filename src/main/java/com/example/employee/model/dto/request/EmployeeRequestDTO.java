@@ -1,30 +1,18 @@
 package com.example.employee.model.dto.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 @Data
-@Builder
+@Getter
+@Setter
 @NoArgsConstructor
 public class EmployeeRequestDTO {
     private String name;
-    private Date date;
+    private Date birthDate;
     private String address;
     private String phone;
     private String gender;
     private String level;
     private String expertise;
-    public EmployeeRequestDTO(String name, Date date, String address, String phone, String gender, String level, String expertise) {
-        this.name = name;
-        this.date = date;
-        this.address = address;
-        this.phone = phone;
-        this.gender = gender;
-        this.level = level;
-        this.expertise = expertise;
-
-    }
 }
