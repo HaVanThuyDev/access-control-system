@@ -44,12 +44,6 @@ public class GlobalExceptionHandler {
         ErrorDetail errorDetail= new ErrorDetail( new Date() ,messageTemplate.message("error validation"),"",request.getDescription(false));
         return new ResponseEntity<>(errorDetail, HttpStatus.BAD_REQUEST);//Server không hiểu hoặc không thể xử lý request do dữ liệu client gửi lên không hợp lệ.
     }
-//    @ExceptionHandler(ResourceNotFoundException.class)
-//    public ResponseEntity<?> ResourceNotFoundException(ResourceNotFoundException e, WebRequest request) {
-//        log.error(e.toString());
-//        ErrorDetail errorDetail= new ErrorDetail( new Date() ,messageTemplate.message("error validate"),"",request.getDescription(false));
-//        return new ResponseEntity<>(errorDetail, HttpStatus.NOT_ACCEPTABLE);//Server nhận request, nhưng không thể trả response theo định dạng mà client yêu cầu trong header
-//    }
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> globalExceptionHandler(Exception e, WebRequest request) {
         log.error(e.toString());

@@ -1,45 +1,44 @@
 package com.example.employee.controller;
-
-
 import com.example.employee.model.SuccessResponse;
 import com.example.employee.model.dto.reponse.UserReponseDTO;
-import com.example.employee.model.dto.request.UserRequestDTO;
-import com.example.employee.model.entity.User;
 import com.example.employee.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/employee")
+@RequestMapping("/user")
 @RequiredArgsConstructor
 public class UserController {
-
     private final UserService userService;
 
-    @PostMapping("/login")
-    public SuccessResponse<UserReponseDTO> login( @RequestBody UserRequestDTO request)   {
-       UserReponseDTO user = userService.login(request.getGmail(),request.getPassword());
-        return new SuccessResponse<>(
-                "login success",
+    @GetMapping("/list")
+    public SuccessResponse<List<UserReponseDTO>> getAll(){
+        List<UserReponseDTO> user = userService.getAll();
+
+        return  new SuccessResponse<>(
+                "suceeee",
                 user
         );
     }
-    @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody UserRequestDTO request)   {
+    @PostMapping("/delete/{id}")
+    public ResponseEntity<?> delete (@PathVariable Long id){
         try {
-            User user = userService.register(request);
-            return  ResponseEntity.ok(" register success");
+            userService.delete(id);
+            return ResponseEntity.ok("delete user success");
         }catch (IllegalArgumentException e){
             return ResponseEntity.badRequest().body("error"+e.getMessage());
         }catch (Exception e){
-            return ResponseEntity.internalServerError().body("register not success");
+            return ResponseEntity.badRequest().body("delete user error");
         }
     }
-
-
-
+    @PostMapping("/search/")
+    public List<UserReponseDTO> search(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String email
+    ){
+        return userService.search(name, email);
+    }
 }

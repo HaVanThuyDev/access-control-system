@@ -1,7 +1,6 @@
 package com.example.employee.controller;
 
 import com.example.employee.model.SuccessResponse;
-import com.example.employee.model.dto.EmployeeDTO;
 import com.example.employee.model.dto.reponse.EmployeeReponseDTO;
 import com.example.employee.model.dto.reponse.ResponseDTO;
 import com.example.employee.model.dto.request.EmployeeRequestDTO;
@@ -22,7 +21,7 @@ public class EmployeeController {
     @GetMapping("/list")
     public SuccessResponse<List<EmployeeReponseDTO>> findAll() {
         return new SuccessResponse<>(
-                "succeess",
+                "",
                 employeeService.findAll()
         );
     }
@@ -72,11 +71,8 @@ public class EmployeeController {
     }
 
     @PostMapping("/details/{id}")
-    public ResponseEntity<ResponseDTO<EmployeeDTO>> getDetails (@PathVariable Long id) {
-        EmployeeReponseDTO dto = employeeService.getDetails(id);
-        return ResponseEntity.ok(
-                ResponseDTO.build(200, "Success", 1L, dto)
-        );
-
+    public ResponseEntity<ResponseDTO<EmployeeReponseDTO>> getDetails (@PathVariable Long id) {
+        EmployeeReponseDTO  employeeDTO = employeeService.getDetails(id);
+        return  ResponseEntity.ok(ResponseDTO.build(200,"sucsss",1l,employeeDTO));
     }
 }

@@ -1,6 +1,5 @@
 package com.example.employee.model.dto.request;
 
-import com.example.employee.model.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

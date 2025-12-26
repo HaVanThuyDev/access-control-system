@@ -1,4 +1,4 @@
-package com.example.employee.service;
+package com.example.employee.service.impl;
 
 import com.example.employee.model.entity.UserDevice;
 import com.example.employee.model.entity.UserOtp;
@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
-public class AuthService {
+public class AuthServiceImpl {
 
     private final UserOtpRepository userOtpRepository;
     private final UserDeviceRepository userDeviceRepository;

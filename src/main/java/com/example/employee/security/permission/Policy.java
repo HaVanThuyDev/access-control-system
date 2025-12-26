@@ -30,22 +30,20 @@ public class Policy {
             if (id == null) {
                 return false; // SEARCH / CREATE không có OWN
             }
-            return isOwner(resource, id, user.getUserId());
+            return isOwner(resource, id, user.getUserId()); //check  này có thuộc về user hiện tại không
         }
         return false;
     }
 
     private boolean isOwner(ResourceType resource, Long id, Long userId) {
         return switch (resource) {
-
             case EMPLOYEE -> employeeRepository.findById(id)
                     .map(e -> e.getMnv().equals(userId))
                     .orElse(false);
+            // DEPARTMENT, ORDER, PRODUCT... thêm tương tự
 
             case USER -> id.equals(userId);
             default -> false;
-
-            // DEPARTMENT, ORDER, PRODUCT... thêm tương tự
         };
     }
 

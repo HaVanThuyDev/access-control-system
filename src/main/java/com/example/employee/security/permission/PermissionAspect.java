@@ -20,7 +20,7 @@ public class PermissionAspect {
     @Before("@annotation(permissionCheck)")
     public void checkPermission(
             JoinPoint joinPoint,
-            PermissionCheck permissionCheck
+            PermissionCheck permissionCheck// kiem tra quyen truoc khi method chay
     ) {
         ResourceType resource = permissionCheck.resource();
         Action action = permissionCheck.action();

@@ -1,14 +1,13 @@
 package com.example.employee.model.dto.reponse;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+
 public class ResponseDTO<T> {
     private String status;
     private Integer code;
@@ -16,7 +15,6 @@ public class ResponseDTO<T> {
     private T data;
     private Long total;
     private String details;
-
     public static ResponseDTO build(int code, String errors, Long total, Object data)
     {
         ResponseDTO apiResponse = new ResponseDTO();

@@ -16,16 +16,10 @@ public class RolePermissionScopeCustomRepositoryImpl implements RolePermissionSc
     public List<RolePermissionDTO> findPermissionsByRole(Role role) {
 
         String jpql = """
-        SELECT new com.example.employee.model.dto.RolePermissionDTO(
-            p.resource,
-            p.action,
-            rps.scope
-                      )
-        FROM RolePermission rps
-        JOIN rps.permission p
-        WHERE rps.role = :role
-    """;
-
+        SELECT new com.example.employee.model.dto.RolePermissionDTO(p.resource,p.action,db.scope )
+        FROM RolePermission db
+        JOIN db.permission p
+        WHERE db.role = :role""";
         return entityManager
                 .createQuery(jpql, RolePermissionDTO.class)
                 .setParameter("role", role)

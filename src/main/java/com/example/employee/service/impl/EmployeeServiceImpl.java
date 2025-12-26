@@ -51,8 +51,8 @@ public class EmployeeServiceImpl implements EmployeeService {
             if (request.getGender() != null && request.getGender().isBlank()) employee.setGender(request.getGender());
             if (request.getLevel() != null && request.getLevel().isBlank()) employee.setLevel(request.getLevel());
             if (request.getExpertise() != null && request.getExpertise().isBlank()) employee.setExpertise(request.getExpertise());
-            Employee updatedEmployee = employeeRepository.save(employee);
-            return new EmployeeDTO(updatedEmployee);
+            Employee update = employeeRepository.save(employee);
+            return new EmployeeDTO(update);
     }
 
     @Override

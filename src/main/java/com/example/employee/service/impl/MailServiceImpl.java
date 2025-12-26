@@ -1,4 +1,4 @@
-package com.example.employee.service;
+package com.example.employee.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class MailService {
+public class MailServiceImpl {
 
     private final JavaMailSender mailSender;
 
