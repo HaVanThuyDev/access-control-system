@@ -55,7 +55,6 @@ public class UserServiceImpl implements UserService {
         if (userRepository.findByGmail(request.getGmail()).isPresent()) {
             throw new BadCredentialsException("User already exists");
         }
-
         User user = new User();
         user.setName(request.getName());
         user.setGmail(request.getGmail());
