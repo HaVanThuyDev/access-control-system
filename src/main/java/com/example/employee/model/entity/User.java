@@ -2,31 +2,30 @@ package com.example.employee.model.entity;
 
 
 import com.example.employee.model.enums.Role;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
 @Entity
-@Table (name = " USERS")
+@Table (name = "USERS")
 
-public class User {
+public class User extends  BaseStatusEntity {
     @Id
-    @Column (name = "ID", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column (name = "ID")
     private  Long id;
     @Column( name ="NAME", nullable = false )
     private  String name;
-    @Column ( name= "GMAIL ", nullable = false)
+    @Column ( name= "GMAIL", nullable = false)
     private  String gmail;
-    @Column(name=" PHONE" ,nullable = false)
-    private  int phone;
-    @Column ( name = " PASS")
+    @Column(name="PHONE" ,nullable = false)
+    private  String phone;
+    @Column ( name = "PASSWORD")
     private  String password;
-    @Column  (name =" VAITRO")
+    @Column  (name ="ROLE")
+    @Enumerated(EnumType.STRING)
     private Role role;
 
 

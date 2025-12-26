@@ -1,7 +1,7 @@
 package com.example.employee.model.enums;
 
-public enum Role {
-    ADMIN,
+public enum ResourceType {
     EMPLOYEE,
-    MANAGER,
+    DEPARTMENT,
+    USER
 }

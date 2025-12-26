@@ -1,5 +1,6 @@
 package com.example.employee.model.dto.request;
 
+import com.example.employee.model.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,9 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor //Tạo constructor đầy đủ tham số:
 public class UserRequestDTO {
     private  String name ;
-    private  String email ;
+    private  String gmail ;
     private String phone ;
-    private  String pass;
-
-
+    private  String password ;
 }
